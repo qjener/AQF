@@ -8,7 +8,7 @@ from pyspark.sql.types import StructType, StructField, StringType, LongType, Boo
 from typing import Optional
 from pyspark.sql import DataFrame, SparkSession, Row
 import notebookutils
-from .dqf_utils import create_spark, Status, normalize_timestamps
+from .aqf_utils import create_spark, Status, normalize_timestamps
 
 
 

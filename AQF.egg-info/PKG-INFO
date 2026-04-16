@@ -1,0 +1,9 @@
+Metadata-Version: 2.4
+Name: AQF
+Version: 1.0
+Summary: Data Quality Framework for Spark-based pipelines
+Author: Moritz Huth
+Author-email: dasxxq@gmail.com
+Dynamic: author
+Dynamic: author-email
+Dynamic: summary

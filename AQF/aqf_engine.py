@@ -1,8 +1,8 @@
-from .dqf_utils import generate_run_id, create_spark, Status, normalize_timestamps
-from .dqf_rule_retriever import *
-from .dqf_dataset_rules import *
-from .dqf_row_rules import *
-from .dqf_logging import result_writer, bad_data_writer
+from .aqf_utils import generate_run_id, create_spark, Status, normalize_timestamps
+from .aqf_rule_retriever import *
+from .aqf_dataset_rules import *
+from .aqf_row_rules import *
+from .aqf_logging import result_writer, bad_data_writer
 
 from pyspark.sql import DataFrame, SparkSession
 from pyspark.sql.functions import max
@@ -12,7 +12,7 @@ from datetime import datetime, timezone
 import notebookutils
 
 
-class DQF_Engine():
+class AQF_Engine():
 
     """
     Class that manages the DQF testing procedure
@@ -98,7 +98,7 @@ class DQF_Engine():
         print(f"Starting Data Quality checks for {self.table_id}")
         
         # Retrieve all configured DQ rules for the specified table
-        df_tests = retrieve_dqf_tests_by_table_id(table_id=self.table_id, test_table=self.config.test_table, spark=self.spark, jdbc_url=self.config.jdbc_url)
+        df_tests = retrieve_aqf_tests_by_table_id(table_id=self.table_id, test_table=self.config.test_table, spark=self.spark, jdbc_url=self.config.jdbc_url)
         tests = df_tests.collect()
         number_of_tests = len(tests)
         if not number_of_tests:
@@ -106,7 +106,7 @@ class DQF_Engine():
             return df
 
         test_list = df_tests.toPandas()["rule_id"].tolist()
-        rules = retrieve_dqf_rules_by_id(test_list, spark=self.spark, jdbc_url=self.config.jdbc_url, rule_table=self.config.rule_table)
+        rules = retrieve_aqf_rules_by_id(test_list, spark=self.spark, jdbc_url=self.config.jdbc_url, rule_table=self.config.rule_table)
 
         # Execute each rule sequentially
         for test in tests:
@@ -152,7 +152,7 @@ class DQF_Engine():
         #canceled = number_of_tests - len(self.status_list)
 
         # Summary output for monitoring (minimal logging)
-        print(f"DQF Results - Tests: {number_of_tests} | Passed: {passed_tests} | Failed: {failed_tests+warnings} | Errors: {incomplete_tests}")
+        print(f"AQF Results - Tests: {number_of_tests} | Passed: {passed_tests} | Failed: {failed_tests+warnings} | Errors: {incomplete_tests}")
 
 
     def get_kwargs(self, connection: str) -> dict:

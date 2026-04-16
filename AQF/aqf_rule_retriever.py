@@ -1,9 +1,9 @@
 from pyspark.sql import DataFrame, SparkSession
-from .dqf_utils import create_spark
+from .aqf_utils import create_spark
 import com.microsoft.sqlserver.jdbc.spark
 from pyspark.sql.types import StructType
 
-def retrieve_dqf_tests_by_table_id(table_id: str, test_table: str, spark: SparkSession, jdbc_url: str) -> DataFrame:
+def retrieve_aqf_tests_by_table_id(table_id: str, test_table: str, spark: SparkSession, jdbc_url: str) -> DataFrame:
     """
     Retrieves all configured Data Quality Framework rules for a specific table.
     
@@ -69,7 +69,7 @@ def retrieve_dqf_tests_by_table_id(table_id: str, test_table: str, spark: SparkS
     return tests
 
 
-def retrieve_dqf_rules_by_id(id_list, spark: SparkSession, jdbc_url: str, rule_table: str) -> DataFrame:
+def retrieve_aqf_rules_by_id(id_list, spark: SparkSession, jdbc_url: str, rule_table: str) -> DataFrame:
     """
     retrieves the rules based on their id
 

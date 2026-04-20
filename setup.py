@@ -2,7 +2,7 @@ from setuptools import setup, find_packages
  
 setup(
     name="AQF", #Name
-    version="1.1", #Version
+    version="1.2", #Version
     packages = find_packages(),  # Automatically find the packages that are recognized in the '__init__.py'.
     description = "Data Quality Framework for Spark-based pipelines", #Description
     author = "qjener",
